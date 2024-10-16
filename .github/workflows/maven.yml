@@ -21,13 +21,19 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04-ppc64le, ubuntu-latest]
+        arch: ['amd64', 'ppc64le']
+        exclude:
+          - os: ubuntu-22.04-ppc64le
+            arch: amd64
+          - os: ubuntu-latest
+            arch: ppc64le
 
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        architecture: '${{ matrix.os }}'
+        architecture: ${{ matrix.arch }}
         distribution: 'temurin'
         java-version: '17'
     - name: Build with Maven
