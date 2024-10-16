@@ -46,7 +46,8 @@ jobs:
           sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
           sudo ln -s /opt/apache-maven-3.9.6 /opt/maven
           export MAVEN_HOME=/opt/maven
-          sudo cp /opt/maven/bin/mvn /usr/local/bin/mvn
+          export PATH="/opt/apache-maven-3.9.6/bin:$PATH"
+          # sudo cp /opt/maven/bin/mvn /usr/local/bin/mvn
           mvn --version
         fi
         mvn -B --file pom.xml -Dmaven.javadoc.skip=true install
